@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+
+  <title>Archives Lite</title>
+  <meta name="description" content="Archives Lite — fast, accessible photo gallery with search, filters, and favorites." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="color-scheme" content="dark light" />
+  <!-- Adaptive theme color for address bar -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0c" />
+
+  <!-- Social / SEO -->
+  <link rel="canonical" href="https://your-domain.example/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Archives Lite" />
+  <meta property="og:description" content="Fast, accessible photo gallery with search, filters, and favorites." />
+  <meta property="og:url" content="https://your-domain.example/" />
+  <meta property="og:image" content="/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Archives Lite" />
+  <meta name="twitter:description" content="Fast, accessible photo gallery with search, filters, and favorites." />
+  <meta name="twitter:image" content="/og-image.png" />
+
+  <!-- PWA-ish bits (swap in your real files when ready) -->
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="application-name" content="Archives Lite" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Archives Lite" />
+
+  <!-- Networking hints -->
+  <link rel="dns-prefetch" href="https://jsonplaceholder.typicode.com" />
+  <link rel="preconnect" href="https://jsonplaceholder.typicode.com" crossorigin />
+
+  <!-- Prevent theme flash before React mounts -->
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = stored || (prefersDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      } catch (_) {}
+    })();
+  </script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/src/styles.css" />
+  <!-- Hint the browser to fetch your entry early (Vite/ESM-friendly) -->
+  <link rel="modulepreload" href="/src/main.tsx" />
+
+  <!-- Minimal inline style just for the skip link (keeps it usable even if CSS fails) -->
+  <style>
+    .skip {
+      position: absolute; left: -9999px; top: -9999px;
+    }
+    .skip:focus {
+      left: 12px; top: 12px; z-index: 9999;
+      padding: 8px 12px; border-radius: 8px;
+      background: #111214; color: #fff; outline: 2px solid #22d3ee;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Provide a true landmark target for the skip link -->
+  <main id="main" tabindex="-1">
+    <div id="root"></div>
+  </main>
+
+  <noscript>
+    <div style="padding:1rem;background:#fee2e2;color:#7f1d1d">
+      This app requires JavaScript to run. Please enable it to view the gallery.
+    </div>
+  </noscript>
+
+  <!-- App entry -->
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Optional: basic SW registration (replace with a real PWA setup in prod) -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
