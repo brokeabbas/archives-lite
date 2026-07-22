@@ -16,9 +16,9 @@
     "@tailwindcss/postcss": "^4.1.13",
     "@types/react": "^18.3.25",
     "@types/react-dom": "^18.3.7",
-    "@vitejs/plugin-react": "^5.0.4",
+    "@vitejs/plugin-react": "^5.2.0",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.3",
-    "vite": "^5.4.20"
+    "vite": "^8.1.5"
   }
 }
